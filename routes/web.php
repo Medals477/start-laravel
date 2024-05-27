@@ -33,5 +33,6 @@ Route::get('/facebook' ,function(){
 })->name('google');
 
     
-Route::get('blogs',[BlogController::class, 'index'])->name('blogs');
+Route::get('blog/index' ,[BlogController::class, 'index'])->name('blog.index');
 Route::get('blog/create', [BlogController::class, 'create'])->name('blog.create');
+Route::post('blog/store', [BlogController::class, 'store'])->name('blog.store');
