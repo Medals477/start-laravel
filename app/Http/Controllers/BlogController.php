@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Blog;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Crypt;
 
 class BlogController extends Controller
 {
@@ -97,6 +98,9 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id = Crypt::decrypt($id);
+        Blog::destroy($id);
+        
+        return redirect()->back()->with('success', 'Record has been deleted successfully!');
     }
 }

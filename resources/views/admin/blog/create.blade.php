@@ -3,8 +3,9 @@
     <div class="container">
         <div class="row my-4">
             <div class="card broder border-2 border-top border-bottom border-danger">
-                <div class="card-header">
+                <div class="d-flex justify-content-between card-header">
                     <h4>Blog</h4>
+                    <a href="{{route('blog.index')}}" class="btn btn-primary">View Records</a>
                 </div>
                 <div class="card-body">
                     <form action="{{route('blog.store')}}" method="post">

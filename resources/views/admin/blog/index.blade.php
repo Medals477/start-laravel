@@ -44,7 +44,11 @@
                                 <td>
                                     <div class="btn-group">
                                         <a href="" class="btn btn-info">Edit</a>
-                                        <a href="" class="btn btn-danger">Delete</a>
+                                        <form action="{{ route('blog.delete', Crypt::encrypt($item->id)) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger">Delete</button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
