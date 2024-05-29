@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Crypt;
 
 class CategoryController extends Controller
 {
@@ -13,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.category.index');
+        $category = Category::all();
+        return view('admin.category.index', compact('category') );
     }
 
     /**
@@ -23,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category.create');
     }
 
     /**
@@ -34,7 +38,21 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title'       => 'required|unique:blogs',
+            'author_name' => 'required',
+            'status'      => 'required',
+        ]);
+
+        $category = new Category();
+        $category->title         = $request->title;
+        $category->slug          = Str::slug($request->title);
+        $category->description   = $request->description;
+        $category->status        = $request->status;
+        $category->author_name   = $request->author_name;
+        $category->save();
+
+        return redirect('/category')->with('success', "Category Successfully Created");
     }
 
     /**
@@ -56,7 +74,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $id = Crypt::decrypt($id);
+        $category = Category::find($id);
+        return view('admin.category.edit', ['category' => $category]);
     }
 
     /**
@@ -68,7 +88,23 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $id = Crypt::decrypt($id);
+        $category = Category::find($id);
+
+        $request->validate([
+            'title'       => 'required|unique:categories,title,'.$id,
+            'author_name' => 'required',
+            'status'      => 'required',
+        ]);
+
+        $category->title         = $request->title;
+        $category->slug          = Str::slug($request->title);
+        $category->description   = $request->description;
+        $category->status        = $request->status;
+        $category->author_name   = $request->author_name;
+        $category->save();
+
+        return redirect()->back()->with('success', "Category Successfully Updated!");
     }
 
     /**
@@ -79,6 +115,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id = Crypt::decrypt($id);
+        Category::destroy($id);
+
+        return redirect()->back()->with('success', "Category Successfully Deleted!");
     }
 }

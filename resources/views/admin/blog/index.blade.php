@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row my-4">
-            <div class="card broder border-2 border-top border-bottom border-danger">
+            <div class="card border border-2 border-top border-bottom border-danger">
                 <div class="card-header d-flex justify-content-between">
                     <h4>Blog List</h4>
                     <a href="{{route('blog.create')}}" class="btn btn-primary">Add New Records</a>
