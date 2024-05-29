@@ -75,7 +75,10 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        //
+        $id = Crypt::decrypt($id);
+        $blog = Blog::find($id);
+        return view('admin.blog.edit', ['blog' => $blog]);
+
     }
 
     /**
@@ -87,7 +90,24 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $id = Crypt::decrypt($id);
+        $blog = Blog::find($id);
+
+        $request->validate([
+            'title'                =>  'required|unique:blogs,title,'.$id,
+            'author_name'           =>  'required',
+            'status'                =>  'required',
+        ]);
+
+        $blog->title            =   $request->title; 
+        $blog->slug             =   Str::slug($request->title); 
+        $blog->description      =   $request->description; 
+        $blog->status           =   $request->status; 
+        $blog->author_name      =   $request->author_name;
+        $blog->save();
+
+        return redirect()->back()->with('success', 'Record has been successfully updated!');
+
     }
 
     /**

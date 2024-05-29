@@ -43,8 +43,8 @@
                                 <td>{{$item->created_at}}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-info">Edit</a>
-                                        <form action="{{ route('blog.delete', Crypt::encrypt($item->id)) }}" method="post">
+                                        <a href="{{ route('blog.edit', Crypt::encrypt($item->id)) }}" class="btn btn-info">Edit</a>
+                                        <form action="{{ route('blog.destroy', Crypt::encrypt($item->id)) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger">Delete</button>

@@ -19,14 +19,14 @@
                             @csrf
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
-                                <input type="text" name="title" id="title" class="form-control @error('title')is-invalid @enderror" placeholder="Please enter title"/>
+                                <input type="text" name="title" id="title" class="form-control @error('title')is-invalid @enderror" placeholder="Please enter title" value="{{ old('title') }}"/>
                                 @error('title')
                                     <span class="text-danger" >{{$message}}</span>
                                 @enderror
                             </div>
                             <div class="col-12 col-md-6 mb-3">
                                 <label for="author_name" class="form-label">Author Name <span class="text-danger">*</span></label>
-                                <input type="text" name="author_name" id="author_name" class="form-control @error('author_name')is-invalid @enderror" placeholder="Please enter author name"/>
+                                <input type="text" name="author_name" id="author_name" class="form-control @error('author_name')is-invalid @enderror" placeholder="Please enter author name" value="{{ old('author_name') }}"/>
                                 @error('author_name')
                                     <span class="text-danger" >{{$message}}</span>
                                 @enderror
@@ -34,9 +34,9 @@
                             <div class="col-6 mb-3">
                                 <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
                                 <div class="">
-                                    <input type="radio" class="btn-check" name="status" id="success-outlined" autocomplete="off" value="1"/>
+                                    <input type="radio" class="btn-check" name="status" id="success-outlined" autocomplete="off" value="1" {{ old('status') == 1 ? "checked":"" }}/>
                                     <label class="btn btn-outline-success" for="success-outlined">Active</label>
-                                    <input type="radio" class="btn-check" name="status" id="danger-outlined" autocomplete="off" value="0" />
+                                    <input type="radio" class="btn-check" name="status" id="danger-outlined" autocomplete="off" value="2"  {{ old('status') == 2 ? "checked":"" }}/>
                                     <label class="btn btn-outline-danger" for="danger-outlined">Inactive</label>
                                 </div>
                                 @error('status')

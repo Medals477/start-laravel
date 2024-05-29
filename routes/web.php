@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,7 +34,11 @@ Route::get('/facebook' ,function(){
 })->name('google');
 
     
-Route::get('blog/index' ,[BlogController::class, 'index'])->name('blog.index');
-Route::get('blog/create', [BlogController::class, 'create'])->name('blog.create');
-Route::post('blog/store', [BlogController::class, 'store'])->name('blog.store');
-Route::delete('blog/delete/{id}' ,[BlogController::class, 'destroy'])->name('blog.delete');
+// Route::get('blog' ,[BlogController::class, 'index'])->name('blog.index');
+// Route::get('blog/create', [BlogController::class, 'create'])->name('blog.create');
+// Route::get('blog/edit/{id}', [BlogController::class, 'edit'])->name('blog.edit');
+// Route::post('blog/store', [BlogController::class, 'store'])->name('blog.store');
+// Route::patch('blog.update/{id}', [BlogController::class, 'update'])->name('blog.update');
+// Route::delete('blog/destroy/{id}' ,[BlogController::class, 'destroy'])->name('blog.destroy');
+Route::resource('blog', BlogController::class);
+Route::resource('category', CategoryController::class);
